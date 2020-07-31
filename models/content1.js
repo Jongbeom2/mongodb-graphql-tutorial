@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const transaction2Schema = new Schema({
+const content1Schema = new Schema({
   title: {
     type: String,
     required: true
@@ -15,4 +15,4 @@ const transaction2Schema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Transaction2', transaction2Schema);
+module.exports = mongoose.model('Content1', content1Schema);

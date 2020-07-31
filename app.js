@@ -6,8 +6,10 @@ const dbConnect = require('./models');
 dbConnect();
 const indexRouter = require('./routes');
 const transactionRouter = require('./routes/transaction');
+const oneToManyRelRouter = require('./routes/oneToManyRel');
 app.use('/', indexRouter);
 app.use('/transaction', transactionRouter);
+app.use('/oneToManyRel',oneToManyRelRouter);
 // set middleware - 404 error
 app.use((req, res, next) => {
   const err = new Error('Not Found');
