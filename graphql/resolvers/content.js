@@ -22,6 +22,9 @@ const resolvers = {
     content(_, args) {
       return _.content;
     },
+    createdAt(_,args){
+      return _.createdAt;
+    }
   },
   Mutation: {
     createContent: async (_, args) => {
