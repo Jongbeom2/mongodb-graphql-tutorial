@@ -2,9 +2,9 @@ const User2 = require('../../models/user2');
 const Booking2 = require('../../models/booking2');
 const resolvers = {
   Query: {
-    user2s: async (_, args) => {
+    async user2s(_, args) {
       try {
-        const user2s = await User2.find().populate('Booking2s');
+        const user2s = await User2.find();
         return user2s;
       } catch (err) {
         console.log(err);
@@ -19,12 +19,16 @@ const resolvers = {
     name(_, args) {
       return _.name;
     },
+    async booking2s(_, args) {
+      const booking2s = await Booking2.find({ user2Id: { $in: _._id } });
+      return booking2s
+    },
     createdAt(_, args) {
       return _.createdAt;
     },
   },
   Mutation: {
-    createUser2: async (_, args) => {
+    async createUser2(_, args) {
       try {
         const user2 = new User2({
           ...args.user2Input

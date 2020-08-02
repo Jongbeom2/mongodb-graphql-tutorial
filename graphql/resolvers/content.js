@@ -2,7 +2,7 @@ const Content = require('../../models/content');
 const { startSession } = require('mongoose');
 const resolvers = {
   Query: {
-    contents: async (_, args) => {
+    async contents(_, args) {
       try {
         const contents = await Content.find();
         return contents;
@@ -22,12 +22,12 @@ const resolvers = {
     content(_, args) {
       return _.content;
     },
-    createdAt(_,args){
+    createdAt(_, args) {
       return _.createdAt;
     }
   },
   Mutation: {
-    createContent: async (_, args) => {
+    async createContent(_, args) {
       try {
         const content = new Content({
           ...args.contentInput
@@ -39,7 +39,7 @@ const resolvers = {
         throw err;
       }
     },
-    createContent1: async (_, args) => {
+    async createContent1(_, args) {
       const session = await startSession();
       try {
         session.startTransaction();
@@ -64,7 +64,7 @@ const resolvers = {
         await session.endSession();
       }
     },
-    createContent2: async (_, args) => {
+    async createContent2(_, args) {
       try {
         const content1 = new Content({
           ...args.contentInput

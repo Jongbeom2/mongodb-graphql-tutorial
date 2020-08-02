@@ -2,7 +2,7 @@ const Booking2 = require('../../models/booking2');
 const User2 = require('../../models/user2');
 const resolvers = {
   Query: {
-    booking2s: async (_, args) => {
+    async booking2s(_, args) {
       try {
         const booking2s = await Booking2.find();
         return booking2s;
@@ -19,7 +19,7 @@ const resolvers = {
     name(_, args) {
       return _.name;
     },
-    user2: async (_, args) => {
+    async user2(_, args) {
       try {
         const user2 = await User2.findById(_.user2Id);
         return user2;
@@ -33,7 +33,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    createBooking2: async (_, args) => {
+    async createBooking2(_, args) {
       try {
         const booking2 = new Booking2({
           name: args.booking2Input.name,

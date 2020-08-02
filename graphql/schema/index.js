@@ -20,6 +20,7 @@ type Query {
   type Booking1{
     _id: ID
     name: String
+    user1: User1
     createdAt: String
   }
   input Booking1Input{
@@ -48,7 +49,7 @@ type Query {
   type User2{
     _id: ID
     name: String
-    bookings: [Booking1]
+    booking2s: [Booking2]
     createdAt: String
   }
   input User2Input{

@@ -3,7 +3,7 @@ const User1 = require('../../models/user1');
 const { startSession } = require('mongoose');
 const resolvers = {
   Query: {
-    booking1s: async (_, args) => {
+    async booking1s(_, args) {
       try {
         const booking1s = await Booking1.find();
         return booking1s;
@@ -17,6 +17,16 @@ const resolvers = {
     _id(_, args) {
       return _._id;
     },
+    async user1(_, args) {
+      try {
+        const user1 = await User1.findOne({ booking1Ids: { $in: _._id } })
+        console.log(user1);
+        return user1;
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
     name(_, args) {
       return _.name;
     },
@@ -25,7 +35,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    createBooking1: async (_, args) => {
+    async createBooking1(_, args) {
       const session = await startSession();
       try {
         session.startTransaction();
