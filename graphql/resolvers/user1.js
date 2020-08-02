@@ -1,4 +1,5 @@
 const User1 = require('../../models/user1');
+const Booking1 = require('../../models/booking1');
 const resolvers = {
   Query: {
     user1s: async (_, args) => {
@@ -18,8 +19,9 @@ const resolvers = {
     name(_, args) {
       return _.name;
     },
-    bookings(_,args){
-      return _.bookings
+    async booking1s(_,args){
+      const booking1s = await Booking1.find({ _id: { $in: _.booking1Ids } })
+      return booking1s
     },
     createdAt(_, args) {
       return _.createdAt;

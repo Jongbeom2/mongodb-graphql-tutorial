@@ -3,7 +3,9 @@ const typeDefs = gql`
 type Query {
     contents: [Content]
     user1s: [User1]
+    user2s: [User2]
     booking1s: [Booking1]
+    booking2s: [Booking2]
   }
   type Content {
     _id: ID
@@ -20,17 +22,36 @@ type Query {
     name: String
     createdAt: String
   }
-  input booking1Input{
+  input Booking1Input{
     name: String
-    userId: String
+    user1Id: String
+  }
+  type Booking2{
+    _id: ID
+    name:String
+    user2: User2
+    createdAt: String
+  }
+  input Booking2Input{
+    name: String
+    user2Id: String
   }
   type User1{
+    _id: ID
+    name: String
+    booking1s: [Booking1]
+    createdAt: String
+  }
+  input User1Input{
+    name: String
+  }
+  type User2{
     _id: ID
     name: String
     bookings: [Booking1]
     createdAt: String
   }
-  input User1Input{
+  input User2Input{
     name: String
   }
   type Mutation{
@@ -38,7 +59,9 @@ type Query {
     createContent1(contentInput: ContentInput): [Content!]
     createContent2(contentInput: ContentInput): [Content!]
     createUser1(user1Input: User1Input): User1!
-    createBooking1(booking1Input: booking1Input): Booking1!
+    createUser2(user2Input: User2Input): User2!
+    createBooking1(booking1Input: Booking1Input): Booking1!
+    createBooking2(booking2Input: Booking2Input): Booking2!
   }
 `;
 

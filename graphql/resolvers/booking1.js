@@ -33,15 +33,16 @@ const resolvers = {
           name: args.booking1Input.name
         })
         const result = await booking1.save({ session });
-        await User1.findByIdAndUpdate(args.booking1Input.userId,
-          { $push: { bookings: booking1 } },
+        await User1.findByIdAndUpdate(args.booking1Input.user1Id,
+          { $push: { booking1Ids: result._id } },
           { session: session, useFindAndModify: false }
         );
         await session.commitTransaction();
         return result;
       } catch (error) {
         await session.abortTransaction();
-        next(error);
+        console.log(error);
+        throw error;
       } finally {
         await session.endSession();
       }
