@@ -1,11 +1,21 @@
 const { gql } = require('apollo-server');
 const typeDefs = gql`
 type Query {
+    people:[Person]
     contents: [Content]
     user1s: [User1]
     user2s: [User2]
     booking1s: [Booking1]
     booking2s: [Booking2]
+  }
+  type Person{
+    _id: ID
+    name: String
+    friends: [Person]
+    createdAt: String
+  }
+  input personInput{
+    name:String
   }
   type Content {
     _id: ID
@@ -63,6 +73,7 @@ type Query {
     createUser2(user2Input: User2Input): User2!
     createBooking1(booking1Input: Booking1Input): Booking1!
     createBooking2(booking2Input: Booking2Input): Booking2!
+    createPerson(personInput: personInput): Person!
   }
 `;
 
