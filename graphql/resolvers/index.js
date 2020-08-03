@@ -12,6 +12,16 @@ const resolvers = {
   ...booking1Resolvers,
   ...booking2Resolvers,
   Query: {
+    books: () => [
+      {
+        title:'Title 1',
+        author : 'Author 1'
+      },
+      {
+        title:'Title 2',
+        author : 'Author 2'
+      }
+    ],
     ...personResolvers.Query,
     ...contentResolvers.Query,
     ...user1Resolvers.Query,
