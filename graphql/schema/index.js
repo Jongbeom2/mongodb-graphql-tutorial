@@ -8,6 +8,30 @@ const typeDefs = gql`
     user2s: [User2]
     booking1s: [Booking1]
     booking2s: [Booking2]
+    posts: [Post]
+    tags: [Tag]
+  }
+  type Post{
+    _id: String
+    name: String
+    tags:[Tag]
+    createdAt: String
+  }
+  input PostInput{
+    name: String
+  }
+  input PostTagInput{
+    postId: String
+    tagId: String
+  }
+  type Tag{
+    _id: String
+    name: String
+    posts:[Post]
+    createdAt: String
+  }
+  input TagInput{
+    name: String
   }
   type Book{
     title:String
@@ -17,9 +41,8 @@ const typeDefs = gql`
     _id: ID
     name: String
     friends: [Person]
-    createdAt: String
   }
-  input personInput{
+  input PersonInput{
     name:String
   }
   type Content {
@@ -78,7 +101,10 @@ const typeDefs = gql`
     createUser2(user2Input: User2Input): User2!
     createBooking1(booking1Input: Booking1Input): Booking1!
     createBooking2(booking2Input: Booking2Input): Booking2!
-    createPerson(personInput: personInput): Person!
+    createPerson(personInput: PersonInput): Person!
+    createPost(postInput: PostInput): Post!
+    addTag(postTagInput: PostTagInput):Post!
+    createTag(tagInput: TagInput):Tag!
   }
 `;
 

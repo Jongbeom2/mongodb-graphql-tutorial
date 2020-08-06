@@ -22,9 +22,6 @@ const resolvers = {
       const friends = await Person.find({ _id: { $in: _.friendIds } })
       return friends
     },
-    createdAt(_, args) {
-      return _.createdAt;
-    },
   },
   Mutation: {
     async createPerson(_, args){

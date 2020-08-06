@@ -8,11 +8,7 @@ const personSchema = new Schema({
   friendIds: [{
     type:Schema.Types.ObjectId,
     ref:'Person'
-  }],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }]
 });
 
 module.exports = mongoose.model('Person', personSchema);

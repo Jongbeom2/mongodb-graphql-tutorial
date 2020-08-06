@@ -4,6 +4,8 @@ const user1Resolvers = require('./user1');
 const user2Resolvers = require('./user2');
 const booking1Resolvers = require('./booking1');
 const booking2Resolvers = require('./booking2');
+const postResolvers = require('./post');
+const tagResolvers = require('./tag');
 const resolvers = {
   ...personResolvers,
   ...contentResolvers,
@@ -11,6 +13,8 @@ const resolvers = {
   ...user2Resolvers,
   ...booking1Resolvers,
   ...booking2Resolvers,
+  ...postResolvers,
+  ...tagResolvers,
   Query: {
     books: () => [
       {
@@ -27,7 +31,9 @@ const resolvers = {
     ...user1Resolvers.Query,
     ...user2Resolvers.Query,
     ...booking1Resolvers.Query,
-    ...booking2Resolvers.Query
+    ...booking2Resolvers.Query,
+    ...postResolvers.Query,
+    ...tagResolvers.Query,
   },
   Mutation:{
     ...personResolvers.Mutation,
@@ -35,7 +41,9 @@ const resolvers = {
     ...user1Resolvers.Mutation,
     ...user2Resolvers.Mutation,
     ...booking1Resolvers.Mutation,
-    ...booking2Resolvers.Mutation
+    ...booking2Resolvers.Mutation,
+    ...postResolvers.Mutation,
+    ...tagResolvers.Mutation,
   }
 }
 
