@@ -1,46 +1,24 @@
-const User2 = require('../../models/user2');
-const Booking2 = require('../../models/booking2');
+const User2 = require("../../models/user2");
+const Booking2 = require("../../models/booking2");
 const resolvers = {
   Query: {
-    async user2s(_, args) {
-      try {
-        const user2s = await User2.find();
-        return user2s;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
+    user2s(_, args) {
+      return User2.find();
     },
   },
   User2: {
-    _id(_, args) {
-      return _._id;
-    },
-    name(_, args) {
-      return _.name;
-    },
-    async booking2s(_, args) {
-      const booking2s = await Booking2.find({ user2Id: { $in: _._id } });
-      return booking2s
-    },
-    createdAt(_, args) {
-      return _.createdAt;
+    booking2s(_, args) {
+      return Booking2.find({ user2Id: { $in: _._id } });
     },
   },
   Mutation: {
-    async createUser2(_, args) {
-      try {
-        const user2 = new User2({
-          ...args.user2Input
-        })
-        const result = await user2.save();
-        return result;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
+    createUser2(_, args) {
+      const user2 = new User2({
+        ...args.user2Input,
+      });
+      return user2.save();
     },
-  }
+  },
 };
 
-module.exports = resolvers; 
+module.exports = resolvers;

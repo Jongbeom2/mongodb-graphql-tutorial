@@ -1,58 +1,34 @@
-const Content = require('../../models/content');
-const { startSession } = require('mongoose');
+const Content = require("../../models/content");
+const { startSession } = require("mongoose");
 const resolvers = {
   Query: {
-    async contents(_, args) {
-      try {
-        const contents = await Content.find();
-        return contents;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
+    contents(_, args) {
+      // Test formatError with this!
+      //throw new Error("Error in Content");
+      return Content.find();
     },
-  },
-  Content: {
-    _id(_, args) {
-      return _._id;
-    },
-    title(_, args) {
-      return _.title;
-    },
-    content(_, args) {
-      return _.content;
-    },
-    createdAt(_, args) {
-      return _.createdAt;
-    }
   },
   Mutation: {
-    async createContent(_, args) {
-      try {
-        const content = new Content({
-          ...args.contentInput
-        })
-        const result = await content.save();
-        return result;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
+    createContent(_, args) {
+      const content = new Content({
+        ...args.contentInput,
+      });
+      return content.save();
     },
     async createContent1(_, args) {
       const session = await startSession();
       try {
         session.startTransaction();
         const content1 = new Content({
-          ...args.contentInput
-        })
+          ...args.contentInput,
+        });
         const content2 = new Content({
-          ...args.contentInput
-        })
-        const result = []
+          ...args.contentInput,
+        });
+        const result = [];
         result.push(await content1.save({ session }));
         // Test transaction with this!
-        //throw new Error('Error in createContent2'); 
+        //throw new Error('Error in createContent2');
         result.push(await content2.save({ session }));
         await session.commitTransaction();
         return result;
@@ -65,25 +41,20 @@ const resolvers = {
       }
     },
     async createContent2(_, args) {
-      try {
-        const content1 = new Content({
-          ...args.contentInput
-        })
-        const content2 = new Content({
-          ...args.contentInput
-        })
-        const result = []
-        result.push(await content1.save());
-        // Test transaction with this!
-        //throw new Error('Error in createContent2'); 
-        result.push(await content2.save());
-        return result;
-      } catch (err) {
-        console.log(err);
-        throw err;
-      }
-    }
-  }
+      const content1 = new Content({
+        ...args.contentInput,
+      });
+      const content2 = new Content({
+        ...args.contentInput,
+      });
+      const result = [];
+      result.push(await content1.save());
+      // Test transaction with this!
+      //throw new Error('Error in createContent2');
+      result.push(await content2.save());
+      return result;
+    },
+  },
 };
 
-module.exports = resolvers; 
+module.exports = resolvers;
