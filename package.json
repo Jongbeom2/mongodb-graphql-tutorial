@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Jongbeom2/mongodb-transaction-tutorial#readme",
   "dependencies": {
-    "apollo-server": "^2.16.1",
+    "apollo-server": "^2.25.3",
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "mongoose": "^5.9.26"
